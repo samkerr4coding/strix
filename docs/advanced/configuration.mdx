@@ -189,6 +189,15 @@ When `STRIX_RUNTIME_BACKEND=podman` is set, Strix uses multi-layer socket fallth
 
 With Podman, Strix automatically uses `host.containers.internal` as the container-to-host gateway (mapping host-bound endpoints cleanly into Podman's built-in DNS), while retaining `host.docker.internal` compatibility.
 
+#### Windows
+
+Automatic socket detection only covers Linux and macOS. On Windows, point Strix at Podman's named pipe explicitly with `STRIX_RUNTIME_SOCKET`, using forward slashes so the URL parses correctly:
+
+```powershell
+$env:STRIX_RUNTIME_BACKEND = "podman"
+$env:STRIX_RUNTIME_SOCKET = "npipe:////./pipe/podman-machine-default"
+```
+
 ## Sandbox Configuration
 
 <ParamField path="STRIX_SANDBOX_EXECUTION_TIMEOUT" default="120" type="integer">
